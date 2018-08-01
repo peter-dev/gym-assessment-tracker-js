@@ -1,0 +1,33 @@
+{
+  "name": "gym-assessment-tracker-js",
+  "version": "0.0.1",
+  "description": "A web-based javascript app to periodically track assessments on individual members",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.3",
+    "express-fileupload": "^0.4.0",
+    "express-handlebars": "^3.0.0",
+    "fs-extra": "^6.0.1",
+    "lodash": "^4.17.10",
+    "lowdb": "^1.0.0",
+    "uuid": "^3.2.1",
+    "winston": "^2.4.2"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "url": "https://github.com/peter-dev/gym-assessment-tracker-js"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
+}
