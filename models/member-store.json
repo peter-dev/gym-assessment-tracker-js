@@ -1,0 +1,98 @@
+{
+  "users": [
+    {
+      "name": "Bob Harper",
+      "email": "bob.harper@trainer.com",
+      "password": "trainer",
+      "memberType": "trainer",
+      "id": ""
+    },
+    {
+      "name": "Lou Ferrigno",
+      "email": "lou.ferrigno@trainer.com",
+      "password": "trainer",
+      "memberType": "trainer",
+      "id": ""
+    },
+    {
+      "name": "Piotr Baran",
+      "email": "piotr.baran@student.com",
+      "password": "student",
+      "address": "Cork, Ireland",
+      "gender": "M",
+      "height": 184,
+      "startWeight": 82,
+      "memberType": "member",
+      "id": "",
+      "assessments": [
+        {
+          "id": "",
+          "weight": 78.5,
+          "chest": 91,
+          "thigh": 48,
+          "upperArm": 33,
+          "waist": 64,
+          "hips": 77,
+          "trend": -1,
+          "comment": "First day in Gym. Well done.",
+          "date": "2018-04-25 10:20:40"
+        }
+      ],
+      "goals": [
+      ]
+    },
+    {
+      "name": "Tara Baran",
+      "email": "tara.baran@student.com",
+      "password": "student",
+      "address": "Cork, Ireland",
+      "gender": "F",
+      "height": 165,
+      "startWeight": 50,
+      "memberType": "member",
+      "id": "",
+      "assessments": [
+        {
+          "id": "",
+          "weight": 48,
+          "chest": 0,
+          "thigh": 0,
+          "upperArm": 0,
+          "waist": 0,
+          "hips": 0,
+          "trend": -1,
+          "comment": "First day in Gym. Well done.",
+          "date": "2018-04-10 08:30:00"
+        },
+        {
+          "id": "",
+          "weight": 47,
+          "chest": 0,
+          "thigh": 0,
+          "upperArm": 0,
+          "waist": 0,
+          "hips": 0,
+          "trend": -1,
+          "comment": "Well done. Keep going.",
+          "date": "2018-04-20 08:30:00"
+        }
+      ],
+      "goals": [
+      ]
+    },
+    {
+      "name": "Peter McCarthy",
+      "email": "peter.mccarthy@student.com",
+      "password": "student",
+      "address": "Waterford, Ireland",
+      "gender": "M",
+      "height": 180,
+      "startWeight": 75,
+      "id": "",
+      "assessments": [
+      ],
+      "goals": [
+      ]
+    }
+  ]
+}

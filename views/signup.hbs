@@ -1,0 +1,57 @@
+{{> menu_welcome id='signup' }}
+
+<div class="ui two column grid basic middle aligned segment">
+  <div class="column">
+    <form class="ui stacked segment form" action="/register" method="POST">
+      <h3 class="ui header">Register</h3>
+      <div class="two fields">
+        <div class="field">
+          <label>Name</label>
+          <input placeholder="Name" type="text" name="name" required>
+        </div>
+        <div class="field">
+          <label>Gender</label>
+          <select name="gender" class="ui dropdown" required>
+            <option value="">Gender</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <div class="ui left icon input">
+          <input placeholder="Email" type="email" name="email" required>
+          <i class="user icon"></i>
+        </div>
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <div class="ui left icon input">
+          <input type="password" name="password" required>
+          <i class="lock icon"></i>
+        </div>
+      </div>
+      <div class="field">
+        <label>Address</label>
+        <input placeholder="Address" type="text" name="address" required>
+      </div>
+      <div class="two fields">
+        <div class="field">
+          <label>Height</label>
+          <input placeholder="00.00cm" type="number" step="0.01" min="0" max="300" name="height"
+                 required>
+        </div>
+        <div class="field">
+          <label>Starting Weight</label>
+          <input placeholder="00.00kg" type="number" step="0.01" min="0" max="300"
+                 name="startWeight" required>
+        </div>
+      </div>
+      <button class="ui blue submit button">Submit</button>
+    </form>
+  </div>
+  <div class="column">
+    <img class="ui image" src="images/gymlogo.jpg">
+  </div>
+</div>
