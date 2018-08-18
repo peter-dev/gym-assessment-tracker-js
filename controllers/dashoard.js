@@ -3,25 +3,26 @@
 const accounts = require('./accounts');
 const memberStore = require('../models/member-store');
 const logger = require('../utils/logger');
+const analytics = require('../utils/analytics');
 
-const trainer = {
+const dashboard = {
 
   index(request, response) {
     const loggedInUser = accounts.getCurrentUser(request);
-    const userPrivileges = accounts.validateMemberType(loggedInUser, 'trainer');
+    const userPrivileges = accounts.validateMemberType(loggedInUser, 'member');
     if (!userPrivileges) {
       response.clearCookie('gym_member');
       response.redirect('/login');
     } else {
       const viewData = {
-        title: 'Trainer',
-        trainer: loggedInUser,
-        members: memberStore.getUsersByMemberType('member'),
+        title: 'Dashboard',
+        member: loggedInUser,
+        stats: analytics.generateMemberStats(loggedInUser),
       };
-      //logger.info('Members: ' + viewData.members);
-      response.render('admin', viewData);
+      logger.info(viewData.stats);
+      response.render('dashboard', viewData);
     }
   },
 };
 
-module.exports = trainer;
+module.exports = dashboard;

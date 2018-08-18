@@ -5,14 +5,14 @@
       "email": "bob.harper@trainer.com",
       "password": "trainer",
       "memberType": "trainer",
-      "id": ""
+      "id": "78340408-5287-4e72-b178-8fd339dc86c9"
     },
     {
       "name": "Lou Ferrigno",
       "email": "lou.ferrigno@trainer.com",
       "password": "trainer",
       "memberType": "trainer",
-      "id": ""
+      "id": "cd44be58-4641-4551-bb88-9464b08a3e0d"
     },
     {
       "name": "Piotr Baran",
@@ -23,7 +23,7 @@
       "height": 184,
       "startWeight": 82,
       "memberType": "member",
-      "id": "",
+      "id": "8c4fac91-cf2a-4b8a-b5b6-25ce85673183",
       "assessments": [
         {
           "id": "",
@@ -50,7 +50,7 @@
       "height": 165,
       "startWeight": 50,
       "memberType": "member",
-      "id": "",
+      "id": "8d14f80a-01de-4284-9c18-96a1f41f7b72",
       "assessments": [
         {
           "id": "",
@@ -88,7 +88,8 @@
       "gender": "M",
       "height": 180,
       "startWeight": 75,
-      "id": "",
+      "memberType": "member",
+      "id": "723eda91-c068-4302-aec3-68b1772c359b",
       "assessments": [
       ],
       "goals": [
