@@ -15,8 +15,7 @@
         <div class="field">
           <label>Gender</label>
           <select name="gender" class="ui dropdown">
-            <option value="M">Male</option>
-            <option value="F">Female</option>
+            <option value="{{member.gender}}">Male</option>
           </select>
         </div>
       </div>
@@ -40,7 +39,7 @@
         </div>
         <div class="field">
           <label>Starting Weight</label>
-          <input placeholder="{{member.weight}} kg" type="number" step="0.01" min="0" max="300"
+          <input placeholder="{{member.startWeight}} kg" type="number" step="0.01" min="0" max="300"
                  name="startWeight">
         </div>
       </div>

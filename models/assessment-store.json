@@ -1,0 +1,43 @@
+{
+  "assessments": [
+    {
+      "id": "44353112-a3bf-11e8-98d0-529269fb1459",
+      "memberId": "8c4fac91-cf2a-4b8a-b5b6-25ce85673183",
+      "weight": 78.5,
+      "chest": 91,
+      "thigh": 48,
+      "upperArm": 33,
+      "waist": 64,
+      "hips": 77,
+      "trend": -1,
+      "comment": "First day in Gym. Well done.",
+      "date": "2018-04-25T10:20:40.100Z"
+    },
+    {
+      "id": "4435363a-a3bf-11e8-98d0-529269fb1459",
+      "memberId": "8d14f80a-01de-4284-9c18-96a1f41f7b72",
+      "weight": 48,
+      "chest": 0,
+      "thigh": 0,
+      "upperArm": 0,
+      "waist": 0,
+      "hips": 0,
+      "trend": -1,
+      "comment": "First day in Gym. Well done.",
+      "date": "2018-04-10T08:30:00.100Z"
+    },
+    {
+      "id": "4435384c-a3bf-11e8-98d0-529269fb1459",
+      "memberId": "8d14f80a-01de-4284-9c18-96a1f41f7b72",
+      "weight": 47,
+      "chest": 0,
+      "thigh": 0,
+      "upperArm": 0,
+      "waist": 0,
+      "hips": 0,
+      "trend": -1,
+      "comment": "Well done. Keep going.",
+      "date": "2018-04-20T12:45:30.100Z"
+    }
+  ]
+}

@@ -14,6 +14,12 @@ const memberStore = {
 
   addUser(user) {
     this.store.add(this.collection, user);
+    this.store.save();
+  },
+
+  updateUser(user) {
+    this.store.update(this.collection, user);
+    this.store.save();
   },
 
   getUserById(id) {

@@ -24,22 +24,8 @@
       "startWeight": 82,
       "memberType": "member",
       "id": "8c4fac91-cf2a-4b8a-b5b6-25ce85673183",
-      "assessments": [
-        {
-          "id": "",
-          "weight": 78.5,
-          "chest": 91,
-          "thigh": 48,
-          "upperArm": 33,
-          "waist": 64,
-          "hips": 77,
-          "trend": -1,
-          "comment": "First day in Gym. Well done.",
-          "date": "2018-04-25 10:20:40"
-        }
-      ],
-      "goals": [
-      ]
+      "assessments": [],
+      "goals": []
     },
     {
       "name": "Tara Baran",
@@ -51,34 +37,8 @@
       "startWeight": 50,
       "memberType": "member",
       "id": "8d14f80a-01de-4284-9c18-96a1f41f7b72",
-      "assessments": [
-        {
-          "id": "",
-          "weight": 48,
-          "chest": 0,
-          "thigh": 0,
-          "upperArm": 0,
-          "waist": 0,
-          "hips": 0,
-          "trend": -1,
-          "comment": "First day in Gym. Well done.",
-          "date": "2018-04-10 08:30:00"
-        },
-        {
-          "id": "",
-          "weight": 47,
-          "chest": 0,
-          "thigh": 0,
-          "upperArm": 0,
-          "waist": 0,
-          "hips": 0,
-          "trend": -1,
-          "comment": "Well done. Keep going.",
-          "date": "2018-04-20 08:30:00"
-        }
-      ],
-      "goals": [
-      ]
+      "assessments": [],
+      "goals": []
     },
     {
       "name": "Peter McCarthy",
@@ -90,10 +50,8 @@
       "startWeight": 75,
       "memberType": "member",
       "id": "723eda91-c068-4302-aec3-68b1772c359b",
-      "assessments": [
-      ],
-      "goals": [
-      ]
+      "assessments": [],
+      "goals": []
     }
   ]
 }

@@ -42,6 +42,33 @@ app.engine('.hbs', exphbs({
         default:
           return options.inverse(this);
       }
+    },
+    // https://www.w3schools.com/js/js_date_methods.asp
+    format_date: function (rawDate, options) {
+      const date = new Date(rawDate);
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
+        "Sep", "Oct", "Nov", "Dec"];
+      const yyyy = date.getFullYear();
+      let dd = date.getDate();
+      const mmm = months[date.getMonth()];
+      let hh = date.getHours();
+      let mm = date.getMinutes();
+      let ss = date.getSeconds();
+
+      if (dd < 10) {
+        dd = '0' + dd;
+      }
+      if (hh < 10) {
+        hh = '0' + hh;
+      }
+      if (mm < 10) {
+        mm = '0' + mm;
+      }
+      if (ss < 10) {
+        ss = '0' + ss;
+      }
+
+      return dd + '-' + mmm + '-' + yyyy + ' ' + hh + ':' + mm + ':' + ss;
     }
   },
   extname: '.hbs',

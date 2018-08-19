@@ -18,6 +18,10 @@ class JsonStore {
     this.db.get(collection).push(obj).last().value();
   }
 
+  update(collection, obj) {
+    this.db.get(collection).chain().find({id: obj.id}).assign(obj).value();
+  }
+
   remove(collection, obj) {
     this.db.get(collection).remove(obj).value();
   }

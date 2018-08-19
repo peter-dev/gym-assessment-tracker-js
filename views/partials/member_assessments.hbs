@@ -1,0 +1,49 @@
+<table class="ui table">
+  <thead>
+  <tr>
+    <th class="three wide">Date</th>
+    <th class="one wide">Weight</th>
+    <th class="one wide">Chest</th>
+    <th class="one wide">Thigh</th>
+    <th class="one wide">Arm</th>
+    <th class="one wide">Waist</th>
+    <th class="one wide">Hips</th>
+    <th class="one wide">Trend</th>
+    <th>Comment</th>
+    <th class="one wide"></th>
+  </tr>
+  </thead>
+  <tbody>
+  {{# each member.assessments}}
+    <tr>
+      <td>{{format_date date}}</td>
+      <td>{{weight}}</td>
+      <td>{{chest}}</td>
+      <td>{{thigh}}</td>
+      <td>{{upperArm}}</td>
+      <td>{{waist}}</td>
+      <td>{{hips}}</td>
+      <td>
+        {{#if_cond trend '==' 0}}
+          <i class="big angle double right icon"></i>
+        {{/if_cond}}
+        {{#if_cond trend '<' 0}}
+          <i class="big green angle double right icon"></i>
+        {{/if_cond}}
+        {{#if_cond trend '>' 0}}
+          <i class="big red angle double left icon"></i>
+        {{/if_cond}}
+      </td>
+      <td>{{comment}}</td>
+      <td><a href="/dashboard/deleteassessment/{{id}}">
+        <div class="ui icon button"><i class="trash alternate icon"></i></div>
+      </a></td>
+    </tr>
+  {{/each}}
+  </tbody>
+  <tfoot>
+  <tr>
+    <th colspan="10">Total Assessments: {{member.assessments.length}}</th>
+  </tr>
+  </tfoot>
+</table>

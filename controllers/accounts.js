@@ -49,13 +49,15 @@ const accounts = {
 
   register(request, response) {
     const member = request.body;
-    member.id = uuid();
-    member.memberType = 'member';
     // check if email address is already registered in the system
     const exists = memberStore.getUserByEmail(request.body.email);
     if (exists) {
       logger.info(`email address ${member.email} is already registered`)
     } else {
+      member.id = uuid();
+      member.memberType = 'member';
+      member.assessments = [];
+      member.goals = [];
       memberStore.addUser(member);
       logger.info(
           `registering new member: ${member.email} with id: ${member.id}`);
@@ -82,6 +84,37 @@ const accounts = {
       // authentication failed
       logger.info('authentication failed');
       response.redirect('/login');
+    }
+  },
+
+  update(request, response) {
+    const loggedInUser = accounts.getCurrentUser(request);
+    const userPrivileges = accounts.validateMemberType(loggedInUser, 'member');
+    if (!userPrivileges) {
+      response.clearCookie('gym_member');
+      response.redirect('/login');
+    } else {
+      if (request.body.name !== null && request.body.name !== '') {
+        loggedInUser.name = request.body.name;
+      }
+      if (request.body.gender !== null && request.body.gender !== '') {
+        loggedInUser.gender = request.body.gender;
+      }
+      if (request.body.password !== null && request.body.password !== '') {
+        loggedInUser.password = request.body.password;
+      }
+      if (request.body.address !== null && request.body.address !== '') {
+        loggedInUser.address = request.body.address;
+      }
+      if (request.body.height !== null && request.body.height !== '') {
+        loggedInUser.height = request.body.height;
+      }
+      if (request.body.startWeight !== null && request.body.startWeight
+          !== '') {
+        loggedInUser.startWeight = request.body.startWeight;
+      }
+      memberStore.updateUser(loggedInUser);
+      response.redirect('/dashboard');
     }
   },
 
