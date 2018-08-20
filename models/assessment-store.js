@@ -29,6 +29,11 @@ const memberStore = {
     const assessment = this.getAssessmentById(id);
     this.store.remove(this.collection, assessment);
     this.store.save();
+  },
+
+  updateAssessment(assessment) {
+    this.store.update(this.collection, assessment);
+    this.store.save();
   }
 };
 

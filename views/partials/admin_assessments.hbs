@@ -1,0 +1,45 @@
+<table class="ui table">
+  <thead>
+  <tr>
+    <th class="three wide">Date</th>
+    <th>Weight</th>
+    <th>Chest</th>
+    <th>Thigh</th>
+    <th>Arm</th>
+    <th>Waist</th>
+    <th>Hips</th>
+    <th>Trend</th>
+    <th class="five wide">Comment</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>{{format_date date}}</td>
+    <td>{{weight}}</td>
+    <td>{{chest}}</td>
+    <td>{{thigh}}</td>
+    <td>{{upperArm}}</td>
+    <td>{{waist}}</td>
+    <td>{{hips}}</td>
+    <td>
+      {{#if_cond trend '==' 0}}
+        <i class="big angle double right icon"></i>
+      {{/if_cond}}
+      {{#if_cond trend '<' 0}}
+        <i class="big green angle double right icon"></i>
+      {{/if_cond}}
+      {{#if_cond trend '>' 0}}
+        <i class="big red angle double left icon"></i>
+      {{/if_cond}}
+    </td>
+    <td>{{comment}}</td>
+  </tr>
+  </tbody>
+</table>
+<form class="ui form" action="/admin/updateassessment/{{id}}" method="POST">
+  <div class="field">
+    <label>Comments</label>
+    <textarea rows="2" placeholder="Comment" name="comment" required></textarea>
+  </div>
+  <button class="ui blue submit button">Update</button>
+</form>

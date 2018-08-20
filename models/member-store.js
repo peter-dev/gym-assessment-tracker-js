@@ -32,6 +32,12 @@ const memberStore = {
 
   getUsersByMemberType(memberType) {
     return this.store.findBy(this.collection, {memberType: memberType});
+  },
+
+  deleteUser(id) {
+    const user = this.getUserById(id);
+    this.store.remove(this.collection, user);
+    this.store.save();
   }
 };
 

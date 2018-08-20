@@ -6,6 +6,12 @@ const logger = require('./logger');
 
 const analytics = {
 
+  /**
+   * Generate statistics for a given member, return object that contains:
+   * - bmi value
+   * - bmi category
+   * - is ideal body weight indicator
+   */
   generateMemberStats(member) {
     let weight = member.startWeight;
     if (member.assessments.length > 0) {
@@ -76,8 +82,7 @@ const analytics = {
         idealBodyWeight = (45.5 + ((inches - fiveFeet) * 2.3)).toFixed(2);
       }
     }
-    logger.info(
-        `Ideal body weight: ${idealBodyWeight} and current weight is: ${weight}`);
+    //logger.info(`Ideal body weight: ${idealBodyWeight} and current weight is: ${weight}`);
     return ((idealBodyWeight <= (weight + 2.0)) && (idealBodyWeight >= (weight
         - 2.0)));
   },

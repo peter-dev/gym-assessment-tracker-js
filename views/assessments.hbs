@@ -1,0 +1,14 @@
+{{> menu_admin id='admin' }}
+
+<section class="ui segment">
+  {{> member_stats}}
+</section>
+<section class="ui segment">
+  {{#if_cond assessments.length '==' 0}}
+    <p>No registered assessments.</p>
+  {{else}}
+    {{#each assessments}}
+      {{> admin_assessments}}
+    {{/each}}
+  {{/if_cond}}
+</section>

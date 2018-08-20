@@ -1,8 +1,9 @@
 {{> menu_admin id='admin' }}
 
 <section class="ui segment">
-  <p>Admin {{trainer.name}}</p>
-  {{#each members}}
-    <p>{{name}}</p>
-  {{/each}}
+  {{#if_cond members.length '==' 0}}
+    <p>No registered members.</p>
+  {{else}}
+    {{> admin_members}}
+  {{/if_cond}}
 </section>

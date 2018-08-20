@@ -22,6 +22,10 @@ routes.get('/dashboard', dashboard.index);
 routes.get('/dashboard/deleteassessment/:id', dashboard.deleteAssessment);
 routes.post('/dashboard/addassessment', dashboard.addAssessment);
 
+// Trainer Home Page
 routes.get('/admin', trainer.index);
+routes.get('/admin/members/:id', trainer.showMember);
+routes.get('/admin/deletemember/:id', trainer.deleteMember);
+routes.post('/admin/updateassessment/:id', trainer.updateAssessment);
 
 module.exports = routes;
