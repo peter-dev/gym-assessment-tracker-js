@@ -12,6 +12,7 @@ routes.get('/', accounts.index);
 routes.get('/signup', accounts.signup);
 routes.get('/login', accounts.login);
 routes.get('/logout', accounts.logout);
+routes.get('/about', accounts.about);
 routes.get('/settings', accounts.settings);
 routes.post('/register', accounts.register);
 routes.post('/authenticate', accounts.authenticate);

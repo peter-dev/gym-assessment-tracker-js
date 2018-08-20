@@ -32,6 +32,20 @@ const accounts = {
     response.render('signup', viewData);
   },
 
+  about(request, response) {
+    const loggedInUser = accounts.getCurrentUser(request);
+    const userPrivileges = accounts.validateMemberType(loggedInUser, 'member');
+    if (!userPrivileges) {
+      response.clearCookie('gym_member');
+      response.redirect('/login');
+    } else {
+      const viewData = {
+        title: 'About',
+      };
+      response.render('about', viewData);
+    }
+  },
+
   settings(request, response) {
     const loggedInUser = accounts.getCurrentUser(request);
     const userPrivileges = accounts.validateMemberType(loggedInUser, 'member');
@@ -125,7 +139,11 @@ const accounts = {
 
   validateMemberType(member, memberType) {
     // identify correct user privileges, i.e Gym Member tries to access /admin page but Member is not a Trainer
-    return (member.memberType === memberType);
+    if (member) {
+      return (member.memberType === memberType);
+    } else {
+      return false;
+    }
   },
 
 };
