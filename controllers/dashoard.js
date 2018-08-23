@@ -79,18 +79,38 @@ const dashboard = {
 
   addGoal(request, response) {
     const loggedInUser = accounts.getCurrentUser(request);
-    const userPrivileges = accounts.validateMemberType(loggedInUser, 'member');
-    if (!userPrivileges) {
+    const userPrivilegesMember = accounts.validateMemberType(loggedInUser,
+        'member');
+    const userPrivilegesTrainer = accounts.validateMemberType(loggedInUser,
+        'trainer');
+    if (!userPrivilegesMember && !userPrivilegesTrainer) {
       response.clearCookie('gym_member');
       response.redirect('/login');
     } else {
       // TODO
+      // get member id from the uri
+      const memberId = request.params.id;
+      // prepare new goal based on form input
+      const goal = request.body;
+      goal.id = uuid();
+      goal.memberId = memberId;
+      goal.status = 'Open';
+      goal.status_date = new Date();
+      goal.target_date = new Date(request.body.target_date);
+      goal.units = (goal.type === 'Weight') ? 'kg' : 'cm';
+      goalStore.addGoal(goal);
+      logger.info(
+          `adding new goal with date: ${goal.status_date} for member id: ${memberId}`);
+      logger.info(goal);
+      if (userPrivilegesMember) {
+        response.redirect('/dashboard');
+      }
+      if (userPrivilegesTrainer) {
+        response.redirect(`/admin/members/${memberId}`);
+      }
+
     }
 
-    let input = request.body;
-    input.goal_raw_date = new Date(input.goal_date);
-    logger.info('Goal retrieved');
-    logger.info(input);
   }
 };
 

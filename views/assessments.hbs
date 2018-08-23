@@ -3,6 +3,9 @@
 <section class="ui segment">
   {{> member_stats}}
 </section>
+
+{{> member_goals}}
+
 <section class="ui segment">
   {{#if_cond member.assessments.length '==' 0}}
     <p>No registered assessments.</p>
