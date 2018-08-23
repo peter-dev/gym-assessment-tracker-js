@@ -1,46 +1,51 @@
-<div class="ui four column center aligned middle aligned grid segment">
+<div class="ui one column center aligned middle aligned grid segment">
   <div class="ui column">
-    <div class="ui statistic">
-      <div class="value">
-        <i class="user icon"></i>
+    <div class="ui five statistics">
+      <div class="statistic">
+        <div class="value">
+          <i class="user icon"></i>
+        </div>
+        <div class="label">
+          {{member.name}}
+        </div>
       </div>
-      <div class="label">
-        {{member.name}}
+      <div class="statistic">
+        <div class="value">
+          {{#if stats.isIdealBodyWeight}}
+            <i class="green tachometer alternate icon"></i>
+          {{else}}
+            <i class="red tachometer alternate icon"></i>
+          {{/if}}
+        </div>
+        <div class="label">
+          IDEAL WEIGHT INDICATOR
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="ui column">
-    <div class="ui statistic">
-      <div class="value">
-        {{#if stats.isIdealBodyWeight}}
-          <i class="green tachometer alternate icon"></i>
-        {{else}}
-          <i class="red tachometer alternate icon"></i>
-        {{/if}}
+      <div class="statistic">
+        <div class="value">
+          <i class="heartbeat icon"></i>
+          {{stats.bmi}}
+        </div>
+        <div class="label">
+          BMI
+        </div>
       </div>
-      <div class="label">
-        IDEAL WEIGHT INDICATOR
+      <div class="statistic">
+        <div class="value">
+          <i class="user md icon"></i>
+        </div>
+        <div class="label">
+          {{stats.bmiCategory}}
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="ui column">
-    <div class="ui statistic">
-      <div class="value">
-        <i class="heartbeat icon"></i>
-        {{stats.bmi}}
-      </div>
-      <div class="label">
-        BMI
-      </div>
-    </div>
-  </div>
-  <div class="ui column">
-    <div class="ui statistic">
-      <div class="value">
-        <i class="user md icon"></i>
-      </div>
-      <div class="label">
-        {{stats.bmiCategory}}
+      <div class="statistic">
+        <div class="value">
+          <i class="calendar check outline icon"></i>
+          {{stats.goals_stats.completed}}/{{stats.goals_stats.total}}
+        </div>
+        <div class="label">
+          Goals
+        </div>
       </div>
     </div>
   </div>

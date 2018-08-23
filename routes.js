@@ -22,6 +22,7 @@ routes.post('/update', accounts.update);
 routes.get('/dashboard', dashboard.index);
 routes.get('/dashboard/deleteassessment/:id', dashboard.deleteAssessment);
 routes.post('/dashboard/addassessment', dashboard.addAssessment);
+routes.post('/dashboard/addgoal', dashboard.addGoal);
 
 // Trainer Home Page
 routes.get('/admin', trainer.index);

@@ -1,0 +1,63 @@
+<div class="ui styled fluid accordion">
+  <div class="title">
+    <i class="dropdown icon"></i>
+    Goals
+  </div>
+  <div class="content">
+    <div class="ui active progress green">
+      <div class="bar" style="width: {{stats.goals_stats.completed_percentage}}%"></div>
+      <div class="label">{{stats.goals_stats.completed_percentage}}% Completed Goals</div>
+    </div>
+    <div class="ui active progress orange">
+      <div class="bar" style="width: {{stats.goals_stats.open_percentage}}%"></div>
+      <div class="label">{{stats.goals_stats.open_percentage}}% In Progress Goals</div>
+    </div>
+    <!-- form to add new goal -->
+    {{> addgoal }}
+    <div class="accordion">
+      <!-- nested accordion - goals completed-->
+      <div class="title">
+        <i class="dropdown icon"></i>
+        Completed [{{stats.goals_stats.completed}}]
+      </div>
+      <div class="content">
+        <div class="ui four cards">
+          {{#each member.goals }}
+            {{#if_cond status '==' 'Completed'}}
+              {{> goal_card }}
+            {{/if_cond}}
+          {{/each}}
+        </div>
+      </div>
+      <!-- nested accordion - goals open-->
+      <div class="title">
+        <i class="dropdown icon"></i>
+        Open [{{stats.goals_stats.open}}]
+      </div>
+      <div class="content">
+        <div class="ui four cards">
+          {{#each member.goals }}
+            {{#if_cond status '==' 'Open'}}
+              {{> goal_card }}
+            {{/if_cond}}
+          {{/each}}
+        </div>
+      </div>
+      <!-- nested accordion - goals missed-->
+      <div class="title">
+        <i class="dropdown icon"></i>
+        Missed [{{stats.goals_stats.missed}}]
+      </div>
+      <div class="content">
+        <div class="ui four cards">
+          {{#each member.goals }}
+            {{#if_cond status '==' 'Missed'}}
+              {{> goal_card }}
+            {{/if_cond}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,64 @@
+{
+  "goals": [
+    {
+      "id": "4c0b2bc6-a6fd-11e8-98d0-529269fb1459",
+      "memberId": "8c4fac91-cf2a-4b8a-b5b6-25ce85673183",
+      "type": "Weight",
+      "target": 80,
+      "units": "kg",
+      "target_date": "2018-04-30T00:00:00.100Z",
+      "status": "Completed",
+      "status_date": "2018-04-25T00:00:00.100Z"
+    },
+    {
+      "id": "09b0a6c2-a70a-11e8-98d0-529269fb1459",
+      "memberId": "8c4fac91-cf2a-4b8a-b5b6-25ce85673183",
+      "type": "Weight",
+      "target": 85,
+      "units": "kg",
+      "target_date": "2018-10-10T00:00:00.100Z",
+      "status": "Open",
+      "status_date": "2018-08-22T00:00:00.100Z"
+    },
+    {
+      "id": "09b0ad20-a70a-11e8-98d0-529269fb1459",
+      "memberId": "8c4fac91-cf2a-4b8a-b5b6-25ce85673183",
+      "type": "Chest",
+      "target": 95,
+      "units": "cm",
+      "target_date": "2018-11-15T00:00:00.100Z",
+      "status": "Open",
+      "status_date": "2018-08-23T00:00:00.100Z"
+    },
+    {
+      "id": "4c0b2ea0-a6fd-11e8-98d0-529269fb1459",
+      "memberId": "8d14f80a-01de-4284-9c18-96a1f41f7b72",
+      "type": "Weight",
+      "target": 48,
+      "units": "kg",
+      "target_date": "2018-04-30T00:00:00.100Z",
+      "status": "Completed",
+      "status_date": "2018-04-10T00:00:00.100Z"
+    },
+    {
+      "id": "4c0b2ffe-a6fd-11e8-98d0-529269fb1459",
+      "memberId": "8d14f80a-01de-4284-9c18-96a1f41f7b72",
+      "type": "Weight",
+      "target": 50,
+      "units": "kg",
+      "target_date": "2018-09-20T00:00:00.100Z",
+      "status": "Open",
+      "status_date": "2018-04-20T00:00:00.100Z"
+    },
+    {
+      "id": "4c0b34cc-a6fd-11e8-98d0-529269fb1459",
+      "memberId": "723eda91-c068-4302-aec3-68b1772c359b",
+      "type": "Weight",
+      "target": 80,
+      "units": "kg",
+      "target_date": "2018-07-20T00:00:00.100Z",
+      "status": "Missed",
+      "status_date": "2018-07-20T00:00:00.100Z"
+    }
+  ]
+}

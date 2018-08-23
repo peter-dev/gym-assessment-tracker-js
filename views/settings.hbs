@@ -15,7 +15,11 @@
         <div class="field">
           <label>Gender</label>
           <select name="gender" class="ui dropdown">
-            <option value="{{member.gender}}">Male</option>
+            {{#if_cond member.gender '==' 'M'}}
+              <option value="{{member.gender}}">Male</option>
+            {{else}}
+              <option value="{{member.gender}}">Female</option>
+            {{/if_cond}}
           </select>
         </div>
       </div>

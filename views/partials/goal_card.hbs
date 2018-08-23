@@ -1,0 +1,20 @@
+{{#if_cond status '==' 'Completed'}}
+  <div class="green card">
+{{/if_cond}}
+{{#if_cond status '==' 'Missed'}}
+  <div class="red card">
+{{/if_cond}}
+{{#if_cond status '==' 'Open'}}
+  <div class="yellow card">
+{{/if_cond}}
+  <div class="content">
+    <div class="header">{{type}} Goal</div>
+    <div class="meta">
+      <span class="right floated time">{{date_diff_in_days status_date}}</span>
+      <span class="category">{{status}}</span>
+    </div>
+    <div class="description">
+      {{target}} {{units}} by {{format_date target_date 'partial'}}
+    </div>
+  </div>
+</div>

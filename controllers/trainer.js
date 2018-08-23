@@ -3,6 +3,7 @@
 const accounts = require('./accounts');
 const memberStore = require('../models/member-store');
 const assessmentStore = require('../models/assessment-store');
+const goalStore = require('../models/goal-store');
 const logger = require('../utils/logger');
 const analytics = require('../utils/analytics');
 
@@ -38,15 +39,23 @@ const trainer = {
     } else {
       // get user id from the uri
       const id = request.params.id;
+      const member = memberStore.getUserById(id);
+      // get member assessments from the store and sort the assessments by date descending
+      member.assessments = assessmentStore.getMemberAssessments(id).sort(
+          function (a, b) {
+            return new Date(b.date) - new Date(a.date);
+          });
+      // get user goals from the store and sort the goals by date descending
+      member.goals = goalStore.getMemberGoals(
+          id).sort(function (a, b) {
+        return new Date(b.status_date) - new Date(a.status_date);
+      });
+
       const viewData = {
         title: 'Trainer',
         trainer: loggedInUser,
-        // get member assessments from the store and sort the assessments by date descending
-        stats: analytics.generateMemberStats(memberStore.getUserById(id)),
-        assessments: assessmentStore.getMemberAssessments(id).sort(
-            function (a, b) {
-              return new Date(b.date) - new Date(a.date);
-            })
+        member: member,
+        stats: analytics.generateMemberStats(member),
       };
       response.render('assessments', viewData);
     }

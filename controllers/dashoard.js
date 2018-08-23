@@ -3,6 +3,7 @@
 const accounts = require('./accounts');
 const memberStore = require('../models/member-store');
 const assessmentStore = require('../models/assessment-store');
+const goalStore = require('../models/goal-store');
 const logger = require('../utils/logger');
 const analytics = require('../utils/analytics');
 const uuid = require('uuid');
@@ -20,6 +21,11 @@ const dashboard = {
       loggedInUser.assessments = assessmentStore.getMemberAssessments(
           loggedInUser.id).sort(function (a, b) {
         return new Date(b.date) - new Date(a.date);
+      });
+      // get member goals from the store and sort the goals by date descending
+      loggedInUser.goals = goalStore.getMemberGoals(
+          loggedInUser.id).sort(function (a, b) {
+        return new Date(b.status_date) - new Date(a.status_date);
       });
       const viewData = {
         title: 'Dashboard',
@@ -69,6 +75,22 @@ const dashboard = {
           `deleting assessment with id ${id} for member: ${loggedInUser.email}`);
       response.redirect('/dashboard');
     }
+  },
+
+  addGoal(request, response) {
+    const loggedInUser = accounts.getCurrentUser(request);
+    const userPrivileges = accounts.validateMemberType(loggedInUser, 'member');
+    if (!userPrivileges) {
+      response.clearCookie('gym_member');
+      response.redirect('/login');
+    } else {
+      // TODO
+    }
+
+    let input = request.body;
+    input.goal_raw_date = new Date(input.goal_date);
+    logger.info('Goal retrieved');
+    logger.info(input);
   }
 };
 

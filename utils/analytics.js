@@ -23,11 +23,13 @@ const analytics = {
     let bmi = this.calculateBmi(member, weight);
     let bmiCategory = this.determineBMICategory(bmi);
     let isIdealBodyWeight = this.isIdealBodyWeight(member, weight);
+    let goals_summary = this.analyzeGoals(member.goals);
 
     const stats = {
       bmi: bmi,
       bmiCategory: bmiCategory,
       isIdealBodyWeight: isIdealBodyWeight,
+      goals_stats: goals_summary
     };
 
     return stats;
@@ -108,6 +110,38 @@ const analytics = {
     }
     // default, no change
     return 0;
+  },
+
+  /**
+   * Iterate through collection of goals and determine number of completed, missed and open goals
+   *
+   */
+  analyzeGoals(goals) {
+    let completed = 0;
+    let missed = 0;
+    let open = 0;
+    for (let i = 0; i < goals.length; i++) {
+      if (goals[i].status === 'Completed') {
+        completed++;
+      } else if (goals[i].status === 'Missed') {
+        missed++;
+      } else if (goals[i].status === 'Open') {
+        open++;
+      }
+    }
+    const total = completed + open;
+    const completed_percentage = ((completed / total) * 100) ? ((completed
+        / total) * 100).toFixed(0) : 0;
+    const open_percentage = ((open / total) * 100) ? ((open / total)
+        * 100).toFixed(0) : 0;
+    return {
+      completed: completed,
+      completed_percentage: completed_percentage,
+      open: open,
+      open_percentage: open_percentage,
+      missed: missed,
+      total: total
+    };
   }
 };
 
