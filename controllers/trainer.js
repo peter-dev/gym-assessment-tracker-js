@@ -24,7 +24,7 @@ const trainer = {
       // retrieve assessments from the store for each member on the list
       for (let i = 0; i < viewData.members.length; i++) {
         viewData.members[i].assessments = assessmentStore.getMemberAssessments(
-            viewData.members[i].id);
+            viewData.members[i].id).length;
       }
       response.render('admin', viewData);
     }
@@ -41,23 +41,24 @@ const trainer = {
       const id = request.params.id;
       const member = memberStore.getUserById(id);
       // get member assessments from the store and sort the assessments by date descending
-      member.assessments = assessmentStore.getMemberAssessments(id).sort(
+      let assessments = assessmentStore.getMemberAssessments(id).sort(
           function (a, b) {
             return new Date(b.date) - new Date(a.date);
           });
       // get user goals from the store and sort the goals by the status update date descending
-      member.goals = goalStore.getMemberGoals(
-          id).sort(function (a, b) {
+      let goals = goalStore.getMemberGoals(id).sort(function (a, b) {
         return new Date(b.status_date) - new Date(a.status_date);
       });
       // check for Missed goals each time dashboard is rendered (event based action)
-      member.goals = analytics.updateMissedGoals(member.goals);
-      goalStore.updateGoal(member.goals);
+      goals = analytics.updateMissedGoals(goals);
+      goalStore.updateGoal(goals);
       const viewData = {
         title: 'Trainer',
         trainer: loggedInUser,
         member: member,
-        stats: analytics.generateMemberStats(member),
+        assessments: assessments,
+        goals: goals,
+        stats: analytics.generateMemberStats(member, assessments, goals),
       };
       response.render('assessments', viewData);
     }

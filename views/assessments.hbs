@@ -7,10 +7,10 @@
 {{> member_goals}}
 
 <section class="ui segment">
-  {{#if_cond member.assessments.length '==' 0}}
+  {{#if_cond assessments.length '==' 0}}
     <p>No registered assessments.</p>
   {{else}}
-    {{#each member.assessments}}
+    {{#each assessments}}
       {{> admin_assessments}}
     {{/each}}
   {{/if_cond}}

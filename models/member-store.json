@@ -23,9 +23,7 @@
       "height": 184,
       "startWeight": 82,
       "memberType": "member",
-      "id": "8c4fac91-cf2a-4b8a-b5b6-25ce85673183",
-      "assessments": [],
-      "goals": []
+      "id": "8c4fac91-cf2a-4b8a-b5b6-25ce85673183"
     },
     {
       "name": "Tara Baran",
@@ -36,9 +34,7 @@
       "height": 165,
       "startWeight": 50,
       "memberType": "member",
-      "id": "8d14f80a-01de-4284-9c18-96a1f41f7b72",
-      "assessments": [],
-      "goals": []
+      "id": "8d14f80a-01de-4284-9c18-96a1f41f7b72"
     },
     {
       "name": "Peter McCarthy",
@@ -49,9 +45,7 @@
       "height": 180,
       "startWeight": 75,
       "memberType": "member",
-      "id": "723eda91-c068-4302-aec3-68b1772c359b",
-      "assessments": [],
-      "goals": []
+      "id": "723eda91-c068-4302-aec3-68b1772c359b"
     }
   ]
 }

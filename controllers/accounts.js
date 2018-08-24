@@ -70,8 +70,6 @@ const accounts = {
     } else {
       member.id = uuid();
       member.memberType = 'member';
-      member.assessments = [];
-      member.goals = [];
       memberStore.addUser(member);
       logger.info(
           `registering new member: ${member.email} with id: ${member.id}`);

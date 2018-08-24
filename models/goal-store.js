@@ -22,18 +22,18 @@ const goalStore = {
 
   addGoal(goal) {
     this.store.add(this.collection, goal);
-    //this.store.save();
+    this.store.save();
   },
 
   deleteGoal(id) {
     const goal = this.getGoalById(id);
     this.store.remove(this.collection, goal);
-    //this.store.save();
+    this.store.save();
   },
 
   updateGoal(goal) {
     this.store.update(this.collection, goal);
-    //this.store.save();
+    this.store.save();
   }
 };
 

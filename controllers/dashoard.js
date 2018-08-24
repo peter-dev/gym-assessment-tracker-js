@@ -17,22 +17,24 @@ const dashboard = {
       response.redirect('/login');
     } else {
       // get member assessments from the store and sort the assessments by date descending
-      loggedInUser.assessments = assessmentStore.getMemberAssessments(
+      let assessments = assessmentStore.getMemberAssessments(
           loggedInUser.id).sort(function (a, b) {
         return new Date(b.date) - new Date(a.date);
       });
       // get member goals from the store and sort the goals by date descending
-      loggedInUser.goals = goalStore.getMemberGoals(
+      let goals = goalStore.getMemberGoals(
           loggedInUser.id).sort(function (a, b) {
         return new Date(b.status_date) - new Date(a.status_date);
       });
       // check for Missed goals each time dashboard is rendered (event based action)
-      loggedInUser.goals = analytics.updateMissedGoals(loggedInUser.goals);
-      goalStore.updateGoal(loggedInUser.goals);
+      goals = analytics.updateMissedGoals(goals);
+      goalStore.updateGoal(goals);
       const viewData = {
         title: 'Dashboard',
         member: loggedInUser,
-        stats: analytics.generateMemberStats(loggedInUser),
+        assessments: assessments,
+        goals: goals,
+        stats: analytics.generateMemberStats(loggedInUser, assessments, goals),
       };
       response.render('dashboard', viewData);
     }
@@ -46,8 +48,7 @@ const dashboard = {
       response.redirect('/login');
     } else {
       // get member assessments
-      loggedInUser.assessments = assessmentStore.getMemberAssessments(
-          loggedInUser.id);
+      let assessments = assessmentStore.getMemberAssessments(loggedInUser.id);
       // prepare new assessment based on user input
       const assessment = request.body;
       assessment.id = uuid();
@@ -55,7 +56,8 @@ const dashboard = {
       assessment.comment = '';
       assessment.date = new Date();
       // determine the trend based on the new assessment
-      assessment.trend = analytics.determineTrend(loggedInUser, assessment);
+      assessment.trend = analytics.determineTrend(loggedInUser.startWeight,
+          assessments, assessment);
       assessmentStore.addAssessment(assessment);
       logger.info(
           `adding new assessment with date: ${assessment.date} for member: ${loggedInUser.email}`);

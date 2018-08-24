@@ -13,16 +13,16 @@ const analytics = {
    * - is ideal body weight indicator
    * - goals summary (open vs completed)
    */
-  generateMemberStats(member) {
+  generateMemberStats(member, assessments, goals) {
     let weight = member.startWeight;
-    if (member.assessments.length > 0) {
+    if (assessments.length > 0) {
       // assessments are already sorted by date descending, first item on the list is the latest assessment
-      weight = member.assessments[0].weight;
+      weight = assessments[0].weight;
     }
     let bmi = this.calculateBmi(member, weight);
     let bmiCategory = this.determineBMICategory(bmi);
     let isIdealBodyWeight = this.isIdealBodyWeight(member, weight);
-    let goals_summary = this.prepareGoalsReport(member.goals);
+    let goals_summary = this.prepareGoalsReport(goals);
 
     const stats = {
       bmi: bmi,
@@ -91,12 +91,12 @@ const analytics = {
   /**
    * Returns an integer to determine if trend is up (1), down (-1), or no change (0)
    */
-  determineTrend(member, assessment) {
-    let weight = member.startWeight;
+  determineTrend(initialWeight, assessments, assessment) {
+    let weight = initialWeight;
     // at least one previous assessment available, sort by date descending date and get the latest weight
-    if (member.assessments.length > 0) {
+    if (assessments.length > 0) {
       // https://en.proft.me/2015/11/14/sorting-array-objects-number-string-date-javascrip/
-      const sorted = member.assessments.sort(function (a, b) {
+      const sorted = assessments.sort(function (a, b) {
         return new Date(b.date) - new Date(a.date);
       });
       weight = sorted[0].weight;

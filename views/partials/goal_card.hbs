@@ -8,7 +8,13 @@
   <div class="yellow card">
 {{/if_cond}}
   <div class="content">
-    <div class="header">{{type}} Goal</div>
+    <div class="header">{{type}} Goal
+      {{#if_cond direction '>' 0}}
+        <i class="arrow up icon"></i>
+      {{else}}
+        <i class="arrow down icon"></i>
+      {{/if_cond}}
+    </div>
     <div class="meta">
       <span class="right floated time">{{date_diff_in_days status_date}}</span>
       <span class="category">{{status}}</span>

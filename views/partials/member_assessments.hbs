@@ -14,7 +14,7 @@
   </tr>
   </thead>
   <tbody>
-  {{# each member.assessments}}
+  {{# each assessments}}
     <tr>
       <td>{{format_date date}}</td>
       <td>{{weight}}</td>
@@ -43,7 +43,7 @@
   </tbody>
   <tfoot>
   <tr>
-    <th colspan="10">Total Assessments: {{member.assessments.length}}</th>
+    <th colspan="10">Total Assessments: {{assessments.length}}</th>
   </tr>
   </tfoot>
 </table>

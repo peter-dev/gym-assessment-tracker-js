@@ -22,7 +22,7 @@
       </div>
       <div class="content">
         <div class="ui four cards">
-          {{#each member.goals }}
+          {{#each goals }}
             {{#if_cond status '==' 'Completed'}}
               {{> goal_card }}
             {{/if_cond}}
@@ -36,7 +36,7 @@
       </div>
       <div class="content">
         <div class="ui four cards">
-          {{#each member.goals }}
+          {{#each goals }}
             {{#if_cond status '==' 'Open'}}
               {{> goal_card }}
             {{/if_cond}}
@@ -50,7 +50,7 @@
       </div>
       <div class="content">
         <div class="ui four cards">
-          {{#each member.goals }}
+          {{#each goals }}
             {{#if_cond status '==' 'Missed'}}
               {{> goal_card }}
             {{/if_cond}}
