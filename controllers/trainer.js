@@ -21,7 +21,7 @@ const trainer = {
         trainer: loggedInUser,
         members: memberStore.getUsersByMemberType('member'),
       };
-      // get no of assessments for each member
+      // retrieve assessments from the store for each member on the list
       for (let i = 0; i < viewData.members.length; i++) {
         viewData.members[i].assessments = assessmentStore.getMemberAssessments(
             viewData.members[i].id);
@@ -45,12 +45,14 @@ const trainer = {
           function (a, b) {
             return new Date(b.date) - new Date(a.date);
           });
-      // get user goals from the store and sort the goals by date descending
+      // get user goals from the store and sort the goals by the status update date descending
       member.goals = goalStore.getMemberGoals(
           id).sort(function (a, b) {
         return new Date(b.status_date) - new Date(a.status_date);
       });
-
+      // check for Missed goals each time dashboard is rendered (event based action)
+      member.goals = analytics.updateMissedGoals(member.goals);
+      goalStore.updateGoal(member.goals);
       const viewData = {
         title: 'Trainer',
         trainer: loggedInUser,
@@ -68,7 +70,7 @@ const trainer = {
       response.clearCookie('gym_member');
       response.redirect('/login');
     } else {
-      // get id from the uri and delete the user
+      // get user id from the uri and delete the user
       const id = request.params.id;
       memberStore.deleteUser(id);
       logger.info(
@@ -84,7 +86,7 @@ const trainer = {
       response.clearCookie('gym_member');
       response.redirect('/login');
     } else {
-      // get assessment id from the uri
+      // get assessment id from the uri and update the comment
       const id = request.params.id;
       const assessment = assessmentStore.getAssessmentById(id);
       assessment.comment = request.body.comment;

@@ -6,6 +6,7 @@
       "type": "Weight",
       "target": 80,
       "units": "kg",
+      "direction": 1,
       "target_date": "2018-04-30T00:00:00.100Z",
       "status": "Completed",
       "status_date": "2018-04-25T00:00:00.100Z"
@@ -16,6 +17,7 @@
       "type": "Weight",
       "target": 85,
       "units": "kg",
+      "direction": 1,
       "target_date": "2018-10-10T00:00:00.100Z",
       "status": "Open",
       "status_date": "2018-08-22T00:00:00.100Z"
@@ -26,6 +28,7 @@
       "type": "Chest",
       "target": 95,
       "units": "cm",
+      "direction": 1,
       "target_date": "2018-11-15T00:00:00.100Z",
       "status": "Open",
       "status_date": "2018-08-23T00:00:00.100Z"
@@ -36,6 +39,7 @@
       "type": "Weight",
       "target": 48,
       "units": "kg",
+      "direction": 1,
       "target_date": "2018-04-30T00:00:00.100Z",
       "status": "Completed",
       "status_date": "2018-04-10T00:00:00.100Z"
@@ -46,6 +50,7 @@
       "type": "Weight",
       "target": 50,
       "units": "kg",
+      "direction": 1,
       "target_date": "2018-09-20T00:00:00.100Z",
       "status": "Open",
       "status_date": "2018-04-20T00:00:00.100Z"
@@ -56,6 +61,7 @@
       "type": "Weight",
       "target": 80,
       "units": "kg",
+      "direction": -1,
       "target_date": "2018-07-20T00:00:00.100Z",
       "status": "Missed",
       "status_date": "2018-07-20T00:00:00.100Z"

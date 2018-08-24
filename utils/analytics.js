@@ -11,19 +11,18 @@ const analytics = {
    * - bmi value
    * - bmi category
    * - is ideal body weight indicator
+   * - goals summary (open vs completed)
    */
   generateMemberStats(member) {
     let weight = member.startWeight;
     if (member.assessments.length > 0) {
-      const sorted = member.assessments.sort(function (a, b) {
-        return new Date(b.date) - new Date(a.date);
-      });
-      weight = sorted[0].weight;
+      // assessments are already sorted by date descending, first item on the list is the latest assessment
+      weight = member.assessments[0].weight;
     }
     let bmi = this.calculateBmi(member, weight);
     let bmiCategory = this.determineBMICategory(bmi);
     let isIdealBodyWeight = this.isIdealBodyWeight(member, weight);
-    let goals_summary = this.analyzeGoals(member.goals);
+    let goals_summary = this.prepareGoalsReport(member.goals);
 
     const stats = {
       bmi: bmi,
@@ -113,10 +112,27 @@ const analytics = {
   },
 
   /**
-   * Iterate through collection of goals and determine number of completed, missed and open goals
-   *
+   * Returns an integer to determine if goal is to go gain (1) or lose (-1)
    */
-  analyzeGoals(goals) {
+  determineGoalDirection(assessments, goal) {
+    const goal_type = goal.type.toLowerCase();
+    const goal_target = goal.target;
+    // initially the goal is to gain if no previous assessment available
+    let last = 0;
+    // at least one previous assessment available, sort by date descending date and get the value
+    if (assessments.length > 0) {
+      const sorted = assessments.sort(function (a, b) {
+        return new Date(b.date) - new Date(a.date);
+      });
+      last = sorted[0][goal_type];
+    }
+    return (goal_target >= last) ? 1 : -1;
+  },
+
+  /**
+   * Iterate through collection of goals and determine number of completed, missed and open goals
+   */
+  prepareGoalsReport(goals) {
     let completed = 0;
     let missed = 0;
     let open = 0;
@@ -129,6 +145,7 @@ const analytics = {
         open++;
       }
     }
+    // do not include missed in total summary but calculate the no of missed goals
     const total = completed + open;
     const completed_percentage = ((completed / total) * 100) ? ((completed
         / total) * 100).toFixed(0) : 0;
@@ -142,6 +159,53 @@ const analytics = {
       missed: missed,
       total: total
     };
+  },
+
+  /**
+   * Iterate through the list of open goals and compare against the latest assessment, update status
+   */
+  updateGoals(goals, assessment) {
+    // at least one goal available
+    if (goals.length > 0) {
+      // for each open goal get the type, target value
+      for (let i = 0; i < goals.length; i++) {
+        if (goals[i].status === 'Open') {
+          const goal_type = goals[i].type.toLowerCase();
+          const goal_target = goals[i].target;
+          const goal_direction = goals[i].direction;
+          // get assessment value that matches goal type (i.e. weight, chest)
+          const last = assessment[goal_type];
+          // compare goal target with the newly created assessment
+          if ((goal_direction > 0 && last >= goal_target) || (goal_direction < 0
+              && last <= goal_target)) {
+            goals[i].status = 'Completed';
+            goals[i].status_date = new Date();
+          }
+        }
+      }
+    }
+    return goals;
+  },
+
+  /**
+   * Iterate through the list of open goals and check the date, update status
+   */
+  updateMissedGoals(goals) {
+    // at least one goal available
+    if (goals.length > 0) {
+      // for each open goal compare the target date with current date
+      for (let i = 0; i < goals.length; i++) {
+        if (goals[i].status === 'Open') {
+          const goal_due_date = new Date(goals[i].target_date);
+          const today = new Date();
+          if (goal_due_date < today) {
+            goals[i].status = 'Missed';
+            goals[i].status_date = today;
+          }
+        }
+      }
+    }
+    return goals;
   }
 };
 

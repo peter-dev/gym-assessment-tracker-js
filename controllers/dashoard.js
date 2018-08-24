@@ -1,7 +1,6 @@
 'use strict';
 
 const accounts = require('./accounts');
-const memberStore = require('../models/member-store');
 const assessmentStore = require('../models/assessment-store');
 const goalStore = require('../models/goal-store');
 const logger = require('../utils/logger');
@@ -27,6 +26,9 @@ const dashboard = {
           loggedInUser.id).sort(function (a, b) {
         return new Date(b.status_date) - new Date(a.status_date);
       });
+      // check for Missed goals each time dashboard is rendered (event based action)
+      loggedInUser.goals = analytics.updateMissedGoals(loggedInUser.goals);
+      goalStore.updateGoal(loggedInUser.goals);
       const viewData = {
         title: 'Dashboard',
         member: loggedInUser,
@@ -46,17 +48,26 @@ const dashboard = {
       // get member assessments
       loggedInUser.assessments = assessmentStore.getMemberAssessments(
           loggedInUser.id);
-      // prepare new assessment based on form input
+      // prepare new assessment based on user input
       const assessment = request.body;
       assessment.id = uuid();
       assessment.memberId = loggedInUser.id;
       assessment.comment = '';
       assessment.date = new Date();
-      // determine new trend
+      // determine the trend based on the new assessment
       assessment.trend = analytics.determineTrend(loggedInUser, assessment);
       assessmentStore.addAssessment(assessment);
       logger.info(
           `adding new assessment with date: ${assessment.date} for member: ${loggedInUser.email}`);
+      // get member goals from the store and sort the goals by date descending
+      let goals = goalStore.getMemberGoals(loggedInUser.id).sort(
+          function (a, b) {
+            return new Date(b.status_date) - new Date(a.status_date);
+          });
+      // recalculate goals each time new assessment is added (event based action)
+      goals = analytics.updateGoals(goals, assessment);
+      goalStore.updateGoal(goals);
+
       response.redirect('/dashboard');
     }
   },
@@ -68,7 +79,7 @@ const dashboard = {
       response.clearCookie('gym_member');
       response.redirect('/login');
     } else {
-      // get id from the uri and delete the assessment
+      // get assessment id from the uri and delete the assessment
       const id = request.params.id;
       assessmentStore.deleteAssessment(id);
       logger.info(
@@ -87,30 +98,33 @@ const dashboard = {
       response.clearCookie('gym_member');
       response.redirect('/login');
     } else {
-      // TODO
       // get member id from the uri
       const memberId = request.params.id;
-      // prepare new goal based on form input
+      // prepare new goal based on user input
       const goal = request.body;
       goal.id = uuid();
       goal.memberId = memberId;
-      goal.status = 'Open';
       goal.status_date = new Date();
       goal.target_date = new Date(request.body.target_date);
+      // if user entered date in the past, the goal will be set to 'Missed'
+      goal.status = (goal.target_date > goal.status_date) ? 'Open' : 'Missed';
       goal.units = (goal.type === 'Weight') ? 'kg' : 'cm';
+      // get member assessments and determine goal direction (gain or lose)
+      goal.direction = analytics.determineGoalDirection(
+          assessmentStore.getMemberAssessments(memberId), goal);
       goalStore.addGoal(goal);
       logger.info(
           `adding new goal with date: ${goal.status_date} for member id: ${memberId}`);
       logger.info(goal);
+      // goal added by the user, redirect to dashboard
       if (userPrivilegesMember) {
         response.redirect('/dashboard');
       }
+      // goal added by the trainer, redirect to trainer page
       if (userPrivilegesTrainer) {
         response.redirect(`/admin/members/${memberId}`);
       }
-
     }
-
   }
 };
 
